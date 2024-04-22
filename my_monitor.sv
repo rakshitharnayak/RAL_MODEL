@@ -24,15 +24,12 @@ class my_monitor extends uvm_monitor;
              if (vif.p_write)
                begin
                   pkt.data = vif.p_wdata;
-                 $display("in monitor: write value: vif.pw_data = %0d, data = %0d",vif.p_wdata, pkt.data);
                end
                else
                  begin
                   pkt.data = vif.prdata;
-                   $display("in monitor:  read value: vif.p_rdata = %0d, data = %0d",vif.prdata, pkt.data);
                  end
                pkt.write = vif.p_write;
-;
                mon_ap.write (pkt);
             end 
          end
