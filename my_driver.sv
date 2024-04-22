@@ -26,6 +26,7 @@ class my_driver extends uvm_driver #(apb_tr);
      
      
       forever begin
+         @(posedge vif.clk);
          seq_item_port.get_next_item (pkt);
          if (pkt.write)
             write (pkt.addr, pkt.data);
@@ -45,10 +46,10 @@ class my_driver extends uvm_driver #(apb_tr);
       @(posedge vif.clk);
       vif.pen <= 1;
       @(posedge vif.clk);
+      @(posedge vif.clk);
       data = vif.prdata;
       vif.psel <= 0;
       vif.pen <= 0;
-     $display("in driver: read value: vif.rdata = %0d, data = %0d",vif.prdata, data);
    endtask
 
    virtual task write ( input bit [31:0] addr,
@@ -59,7 +60,6 @@ class my_driver extends uvm_driver #(apb_tr);
       vif.psel <= 1;
       @(posedge vif.clk);
       vif.pen <= 1;
-     $display("in driver: written value: vif.pw_data = %0d, data = %0d",vif.p_wdata, data);
       @(posedge vif.clk);
       vif.psel <= 0;
       vif.pen <= 0;
