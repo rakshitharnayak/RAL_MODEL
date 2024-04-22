@@ -17,6 +17,7 @@ class reg_env extends uvm_env;
       m_apb2reg_predictor  = uvm_reg_predictor #(apb_tr) :: type_id :: create ("m_apb2reg_predictor", this);
 
       m_ral_model.build ();
+//    m_ral_model.default_map.set_check_on_read(1);
       m_ral_model.lock_model ();
      uvm_config_db #(ral_sys_block)::set (null, "*", "m_ral_model", m_ral_model);
    endfunction
