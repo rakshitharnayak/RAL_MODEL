@@ -12,7 +12,7 @@ class reg2apb_adapter extends uvm_reg_adapter;
       pkt.write = (rw.kind == UVM_WRITE) ? 1: 0;
       pkt.addr  = rw.addr;
       pkt.data  = rw.data;
-      `uvm_info ("adapter", $sformatf ("reg2bus addr=0x%0h data=0x%0h kind=%s", pkt.addr, pkt.data, rw.kind.name), UVM_DEBUG) 
+//      `uvm_info ("adapter", $sformatf ("reg2bus addr=0x%0h data=0x%0h kind=%s", pkt.addr, pkt.data, rw.kind.name), UVM_NONE) 
       return pkt; 
    endfunction
 
@@ -25,6 +25,6 @@ class reg2apb_adapter extends uvm_reg_adapter;
       rw.kind = pkt.write ? UVM_WRITE : UVM_READ;
       rw.addr = pkt.addr;
       rw.data = pkt.data;
-      `uvm_info ("adapter", $sformatf("bus2reg : addr=0x%0h data=0x%0h kind=%s status=%s", rw.addr, rw.data, rw.kind.name(), rw.status.name()), UVM_DEBUG)
+//      `uvm_info ("adapter", $sformatf("bus2reg : addr=0x%0h data=0x%0h kind=%s status=%s", rw.addr, rw.data, rw.kind.name(), rw.status.name()), UVM_NONE)
    endfunction
 endclass
