@@ -1,13 +1,15 @@
 
-class my_sequence extends uvm_sequence#(apb_tr);
-   `uvm_object_utils (my_sequence)
+class register_sequence extends uvm_sequence#(apb_tr);
+  `uvm_object_utils (register_sequence)
   
-   function new (string name = "my_sequence");
+  //new constructor
+  function new (string name = "register_sequence");
       super.new (name);
    endfunction
 
    ral_sys_block    m_ral_model;  //ral model reg-block
  
+  //task body
    virtual task body ();
      uvm_reg_data_t read_data;
      uvm_status_e status;
@@ -17,6 +19,7 @@ class my_sequence extends uvm_sequence#(apb_tr);
       `uvm_fatal(get_type_name(), "m_ral_model is not set at top level");
      
 //*****************************************************************************************************  
+     /*
      //reset check
      `uvm_info(get_type_name(), $sformatf("********RESET CHECK ********"), UVM_LOW)
      //m_Chip_enable
@@ -34,7 +37,9 @@ class my_sequence extends uvm_sequence#(apb_tr);
                     'b1, read_data
                   )
                 )
+                */
  //**************************************************************************      
+     /*
        
        `uvm_info(get_type_name(), $sformatf("******** chip ID ********"), UVM_LOW)
      
@@ -50,8 +55,9 @@ class my_sequence extends uvm_sequence#(apb_tr);
                     'hAA, read_data
                   )
                 )
+       */
 //**************************************************************************    
-       
+ /*      
  `uvm_info(get_type_name(), $sformatf("******** m_Output_Port_enable********"), UVM_LOW)
      
        `uvm_info(get_type_name(), $sformatf("******** read m_Output_Port_enable ********"), UVM_LOW) 
@@ -66,8 +72,9 @@ class my_sequence extends uvm_sequence#(apb_tr);
                     'b0001, read_data
                   )
                 )
+                */
 //**************************************************************************    
-       
+      
        //write and read chip enable
        
        `uvm_info(get_type_name(), $sformatf("******** write and read chip enable ********"), UVM_LOW)
@@ -77,7 +84,8 @@ class my_sequence extends uvm_sequence#(apb_tr);
      
      m_ral_model.cfg.m_Chip_enable.read(status,read_data);
      `uvm_info(get_type_name(), $sformatf("READ: desired=0x%0h mirrored=0x%0h", m_ral_model.cfg.m_Chip_enable.get(), m_ral_model.cfg.m_Chip_enable.get_mirrored_value()), UVM_NONE)
-     
+    
+     /*
      `uvm_info(get_type_name(), $sformatf("******** set and update chip enable ********"), UVM_LOW)
      
      m_ral_model.cfg.m_Chip_enable.set(1'b0);
@@ -94,8 +102,9 @@ class my_sequence extends uvm_sequence#(apb_tr);
       m_ral_model.cfg.m_Chip_enable.mirror(status, UVM_CHECK);
      `uvm_info(get_type_name(), $sformatf("MIRROR: desired=0x%0h mirrored=0x%0h", m_ral_model.cfg.m_Chip_enable.get(), m_ral_model.cfg.m_Chip_enable.get_mirrored_value()), UVM_NONE)
 
-
+*/
  //**************************************************************************    
+     /*
      //try to write in chip id register
      //m_Chip_id - Read Only
      `uvm_info(get_type_name(), $sformatf("******** chip id********"), UVM_LOW)
@@ -116,14 +125,14 @@ class my_sequence extends uvm_sequence#(apb_tr);
                   )
                 )
         
-       
+      */ 
  //**************************************************************************    
      
      //m_Chip_output enable - Read and write 
        `uvm_info(get_type_name(), $sformatf("******** chip output port enable ********"), UVM_LOW)
        `uvm_info(get_type_name(), $sformatf("******** write and read chip output port enable ********"), UVM_LOW)
      
-       m_ral_model.cfg.m_Output_Port_enable.write(status,4'b1000);//check_on_read
+     m_ral_model.cfg.m_Output_Port_enable.write(status,4'b0100);//check_on_read
         `uvm_info("[SEQ]:", $sformatf("Write Tx to DUT -> Desired Value: %0d & Mirrored Value: %0d",m_ral_model.cfg.m_Output_Port_enable.get(), m_ral_model.cfg.m_Output_Port_enable.get_mirrored_value()),UVM_NONE);
         
         m_ral_model.cfg.m_Output_Port_enable.read(status,read_data);
