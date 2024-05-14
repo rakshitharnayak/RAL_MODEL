@@ -1,5 +1,4 @@
-// 1)chip_enable register class:
-
+// chip_enable register class:
 
 class Chip_enable extends uvm_reg;
   rand uvm_reg_field En;
@@ -9,7 +8,7 @@ class Chip_enable extends uvm_reg;
     super.new(name,1,UVM_NO_COVERAGE); //register size -> 1
   endfunction:new
   
-   // Build all register field objects
+  // Build all register field objects
   virtual function void build();
     this.En = uvm_reg_field::type_id::create ("En"); 
     this.En.configure (this,1,0,"RW",0,1'h1,1,1,1);
@@ -18,7 +17,7 @@ class Chip_enable extends uvm_reg;
 //   En.configure(this, 1(no of bits),0(lsb starting from),RW, 0(bit is volatile-> getting changed in between), 1’h0(uVm reg data- reset data), 1(it has  a reset so 1), 1(is the bit is randomized? yes so 1), 1(individually accessible?yes so 1);
 endclass:Chip_enable
 
-// 2)Chip Id register class:
+// Chip Id register class:
 
 class Chip_Id extends uvm_reg;
   rand uvm_reg_field Id;
@@ -58,7 +57,7 @@ class Output_Port_enable extends uvm_reg;
 endclass:Output_Port_enable
 
 
-// 4) reg block
+//  reg block
 
 class reg_block extends uvm_reg_block;
   `uvm_object_utils(reg_block);
