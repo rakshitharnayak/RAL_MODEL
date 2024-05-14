@@ -1,0 +1,3 @@
+register enable default value has to be one but dut value of register enable is zero
+output packet should be in the order of destination address, source address, id and data. But it's returning the packet in order of source address, destination address, id and data
+cannot receive multiple packets
